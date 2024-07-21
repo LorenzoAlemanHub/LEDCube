@@ -725,7 +725,7 @@ void fireworks (int iterations, int n, int delayx) {
     // shoot a particle up in the air
     for (e=0; e < origin_z; e++) {
       LED(e, origin_x, origin_y, r, g, b);
-      x = (50 * e);
+      //x = (50 * e);
       delay(30);
       LED(e, origin_x, origin_y, 0, 0, 0);
       //clean();

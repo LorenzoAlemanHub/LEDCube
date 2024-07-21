@@ -4,6 +4,7 @@
 #include "DarrahAnimations.h"
 #include "PorterRobinsonMirror.h"
 #include "MadeonHypermania.h"
+#include "PorterRobinsonKnockYourselfOut.h"
 
 #define latch_pin 2   // can use any pin you want to latch the shift registers
 #define blank_pin 4   // same, can use any pin you want for this, just make sure you pull up via a 1k to 5V
@@ -96,8 +97,8 @@ void setup()
 
 void loop()
 {
-  blinkTimer(500);
-  timer(5000);
+  //blinkTimer(500);
+  //timer(5000);
   //oneLedSpiral();
   //gradualBlink(0,0,7,3,1,0,500);
   //wipe_out();
@@ -107,9 +108,12 @@ void loop()
   //fireflies();
   //myRain(500);
   //timeTest(1000);
-  porterMirror();
+  ///porterMirror();
   //testFunc();
   //fireworks(10,10,10);
+  //expandingCube(50);
+  //contractingCube(50);
+  //expandingSquare(2);
   //rgbCube();
   //otherTwinkle();
   //twinkleWhite();
@@ -127,8 +131,8 @@ void loop()
   //slices();
   //fillColor(WHITE);
   //bouncyvTwoWhite();
-  bouncyLines();
-  clean();
+  //bouncyLines();
+  //clean();
   //wipe_out();
 }// loop()
 
