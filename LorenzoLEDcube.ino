@@ -97,43 +97,16 @@ void setup()
 
 void loop()
 {
-  //blinkTimer(500);
-  //timer(5000);
-  //oneLedSpiral();
-  //gradualBlink(0,0,7,3,1,0,500);
-  //wipe_out();
-  //basic_rgb_cycle(50);
-  //testFunc();
-  //blinkRed();
-  //fireflies();
-  //myRain(500);
-  //timeTest(1000);
-  ///porterMirror();
-  //testFunc();
-  //fireworks(10,10,10);
-  //expandingCube(50);
-  //contractingCube(50);
-  //expandingSquare(2);
-  //rgbCube();
-  //otherTwinkle();
-  //twinkleWhite();
-  //twinkleColorful();
-  //twinkleRedYellowBlue();
-  //sinwaveTwo();
-  //folder();
-  //greenPrint();
-  //bluePrint();
-  //oneColorFill(10,'r');
-  //oneColorFill(10,'g');
-  //oneColorFill(10,'b');
-  //rainVersionTwo();
-  //colorScramble();
-  //slices();
-  //fillColor(WHITE);
-  //bouncyvTwoWhite();
-  //bouncyLines();
-  //clean();
-  //wipe_out();
+  //knockYourselfOut();
+  blinkTimer(500);
+  timer(5000);
+  porterMirror();
+  whitePane();
+  bouncyLines(3800);
+  whitePane();
+  bouncyLines(6700);
+  whitePane();
+  bouncyLines(7000);
 }// loop()
 
 //This routine is called in the background automatically at frequency set by OCR1A

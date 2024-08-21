@@ -1,90 +1,4 @@
-//#include "LED.h"
-//#include "ArduinoQueue.h"
-
-void blueDownwardRain(int d)
-{
-  // max 16 drops at once...
-  led raindrops[16];
-  for (int n = 0; n < 512; n++)
-  {
-    for (int i = 0; i < 16; i++)
-    {
-      if (raindrops[i].lev == -1)
-      {
-        LED(0, raindrops[i].row, raindrops[i].col, raindrops[i].r, raindrops[i].g, 0);
-        raindrops[i].isOn = false;
-        raindrops[i].col = 0;
-        raindrops[i].row = 0;
-        raindrops[i].lev = 7;
-        raindrops[i].b = 0;
-      }
-      if (!raindrops[i].isOn)
-      {
-        if (random(1,4) == 2)
-        {
-          raindrops[i].isOn = true;
-          raindrops[i].col = random(8);
-          raindrops[i].row = random(8);
-          raindrops[i].lev = 7;
-          raindrops[i].b = 15;
-        }
-      }
-      LED(raindrops[i].lev, raindrops[i].row, raindrops[i].col, raindrops[i].r, raindrops[i].g, raindrops[i].b);
-    }
-    delay(d);
-    for (int i = 0; i < 16; i++)
-    {
-      if (raindrops[i].isOn)
-      {
-        LED(raindrops[i].lev, raindrops[i].row, raindrops[i].col, raindrops[i].r, raindrops[i].g, 0);
-        raindrops[i].lev--;
-      }
-    }
-  }
-}
-
-void blueUpwardRain(int d)
-{
-  // max 16 drops at once...
-  led raindrops[16];
-  for (int n = 0; n < 512; n++)
-  {
-    for (int i = 0; i < 16; i++)
-    {
-      if (raindrops[i].lev == 8)
-      {
-        LED(7, raindrops[i].row, raindrops[i].col, raindrops[i].r, raindrops[i].g, 0);
-        raindrops[i].isOn = false;
-        raindrops[i].col = 0;
-        raindrops[i].row = 0;
-        raindrops[i].lev = 0;
-        raindrops[i].b = 0;
-      }
-      if (!raindrops[i].isOn)
-      {
-        if (random(1,4) == 2)
-        {
-          raindrops[i].isOn = true;
-          raindrops[i].col = random(8);
-          raindrops[i].row = random(8);
-          raindrops[i].lev = 0;
-          raindrops[i].b = 15;
-        }
-      }
-      LED(raindrops[i].lev, raindrops[i].row, raindrops[i].col, raindrops[i].r, raindrops[i].g, raindrops[i].b);
-    }
-    delay(d);
-    for (int i = 0; i < 16; i++)
-    {
-      if (raindrops[i].isOn)
-      {
-        LED(raindrops[i].lev, raindrops[i].row, raindrops[i].col, raindrops[i].r, raindrops[i].g, 0);
-        raindrops[i].lev++;
-      }
-    }
-    
-  }
-}
+int mirrorBPM = 112;
 
 void blueRain()
 {
@@ -106,7 +20,6 @@ void blueRain()
     {
       if (raindrops[i].lev == -1)
       {
-        //LED(0, raindrops[i].row, raindrops[i].col, 0, 0, 0);
         raindrops[i].isOn = false;
         raindrops[i].col = 0;
         raindrops[i].row = 0;
@@ -184,7 +97,6 @@ void blueRain()
     {
       if (raindrops[i].lev == 8)
       {
-        //LED(0, raindrops[i].row, raindrops[i].col, 0, 0, 0);
         raindrops[i].isOn = false;
         raindrops[i].col = 0;
         raindrops[i].row = 0;
@@ -206,7 +118,6 @@ void blueRain()
       }
       LED(raindrops[i].lev, raindrops[i].row, raindrops[i].col, 0, raindrops[i].g, raindrops[i].b);
     }
-    //delay(d);
     if (count < 1000)
     {
       rainSpeed = 120;
@@ -240,15 +151,10 @@ void blueRain()
       }
     }
   }
-
-  ///////// red blinks /////////////
-  // 3s blinking
 }
 
 void blinkColor(int blinkTime, byte* color)
 {
-  //byte *ryb[3] = {RED, YELLOW, BLUE};
-  //byte *randomColor = ryb[random(3)];
   int numLeds = 20;
   led twinks[numLeds];
   for (int i = 0; i < numLeds; i++)
@@ -332,59 +238,6 @@ void doubleBlinkColor(int blinkTime, byte* color1, byte* color2)
   }
 }
 
-void timeTest(int t)
-{
-  start = millis();
-  while((millis()-start) < t)
-  {
-    LED(0,0,0,15,0,0);
-  }
-
-  start = millis();
-  while((millis()-start) < t)
-  {
-    LED(0,0,0,0,0,0);
-  }
-}
-
-void blinkTest()
-{
-  int numLeds = 20;
-  byte *ryb[3] = {RED, YELLOW, BLUE};
-  byte *randomColor = ryb[random(3)];
-  led twinks[numLeds];
-  for (int i = 0; i < numLeds; i++)
-  {
-    led newLed;
-    newLed.lev = random(8);
-    newLed.row = random(8);
-    newLed.col = random(8);
-    newLed.r = randomColor[0];
-    newLed.g = randomColor[1];
-    newLed.b = randomColor[2];
-    twinks[i] = newLed;
-  }
-
-  for (int n = 0; n <= 100; n++)
-  {
-    for (int i = 0; i < numLeds; i++)
-    {
-      LED(twinks[i].lev, twinks[i].row, twinks[i].col, twinks[i].r, twinks[i].g, twinks[i].b);
-    }
-    delay(50);
-    for (int i = 0; i < numLeds; i++)
-    {
-      LED(twinks[i].lev, twinks[i].row, twinks[i].col, 0, 0, 0);
-    }
-    delay(50);
-  }
-
-  for (int i = 0; i < numLeds; i++)
-  {
-    LED(twinks[i].lev, twinks[i].row, twinks[i].col, 0, 0, 0);
-  }
-}
-
 void randomLEDs()
 {
   int numLeds = 18;
@@ -404,19 +257,6 @@ void randomLEDs()
     twinks[i] = newLed;
   }
 
-  /*for (int n = 0; n <= beats; n++)
-  {
-    for (int i = 0; i < numLeds; i++)
-    {
-      LED(twinks[i].lev, twinks[i].row, twinks[i].col, twinks[i].r, twinks[i].g, twinks[i].b);
-    }
-    delay(100);
-    for (int i = 0; i < numLeds; i++)
-    {
-      LED(twinks[i].lev, twinks[i].row, twinks[i].col, 0, 0, 0);
-    }
-    delay(100);
-  }*/
   for (int i = 0; i < numLeds; i++)
   {
     LED(twinks[i].lev, twinks[i].row, twinks[i].col, twinks[i].r, twinks[i].g, twinks[i].b);
@@ -464,8 +304,6 @@ void whiteTwinkle()
     newLed.r = 15;
     newLed.g = 15;
     newLed.b = 15;
-    //newLed.g = 7;
-    //newLed.b = 1;
     LED(newLed.lev, newLed.row, newLed.col, newLed.r, newLed.g, newLed.b);
     blinkQ.enqueue(newLed);
   }
@@ -473,6 +311,16 @@ void whiteTwinkle()
   {
     led off = blinkQ.dequeue();
     LED(off.lev, off.row, off.col, 0, 0, 0);
+  }
+}
+
+void whitePane()
+{
+  for (int i = 7; i >= 0; i--)
+  {
+    lightSliceY(i,15,15,15);
+    delay(50);
+    lightSliceY(i,0,0,0);
   }
 }
 
@@ -485,7 +333,7 @@ void porterMirror()
   blueRain();
   ///////// pause before color blinks /////////////
   start = millis();
-  pause = 4950;
+  pause = 5030;
   while((millis()-start) < pause)
   {
     if (!flag)
@@ -515,12 +363,12 @@ void porterMirror()
   blinkColor(1000, BLUE);
   blinkColor(3000, RED);
   start = millis();
-  pause = 1200;
+  pause = 1450;
   while((millis()-start) < pause)
   {}
-  blinkColor(2000, YELLOW);
+  blinkColor(1750, YELLOW);
   start = millis();
-  pause = 300;
+  pause = 250;
   while((millis()-start) < pause)
   {}
   blinkColor(1950, BLUE);
@@ -558,6 +406,4 @@ void porterMirror()
   }
   lightSliceY(level,0,0,0);
   whiteTwinkle();
-  //bouncyvTwoWhite();
-  //blinkColor(1400, WHITE);
 }

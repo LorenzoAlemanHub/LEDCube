@@ -150,6 +150,64 @@ void rainWithSlices()
   }
 }
 
+void expandingSquare(int col)
+{
+  //int col = 0;
+  int lowerBound, upperBound, b1, b2;
+  bool light = false;
+  for (int i = 3; i >= 0; i--) // 4 cubes, 2,4,6,8 cubed
+  {
+    lowerBound = 0 + i;
+    upperBound = 7 - i;
+    // Light LED:
+    // if lev == bound, light inbetween bound
+    // else, light only at bounds
+    for (int lev = 0; lev <= 7; lev++)
+    {
+      for (int row = 0; row <= 7; row++)
+      {
+        if (lev == lowerBound || lev == upperBound)
+        {
+          // light between
+          if (row >= lowerBound && row <= upperBound)
+          {
+            LED(lev,row,col,15,0,0);
+          }
+        }
+        else if (lev > lowerBound && lev < upperBound)
+        {
+          if ((row == lowerBound || row == upperBound))
+          {
+            LED(lev,row,col,15,0,0);
+          }
+        }
+      }
+    }
+    delay(100);
+    for (int lev = 0; lev <= 7; lev++)
+    {
+      for (int row = 0; row <= 7; row++)
+      {
+        if (lev == lowerBound || lev == upperBound)
+        {
+          // light between
+          if (row >= lowerBound && row <= upperBound)
+          {
+            LED(lev,row,col,0,0,0);
+          }
+        }
+        else if (lev > lowerBound && lev < upperBound)
+        {
+          if ((row == lowerBound || row == upperBound))
+          {
+            LED(lev,row,col,0,0,0);
+          }
+        }
+      }
+    }
+  }
+}
+
 void oneLedSpiral()
 {
   int l = 7;
@@ -310,7 +368,7 @@ void fillWhite()
   }
 }
 
-void bouncyLines()
+void bouncyLines(int time)
 {
   randomSeed(analogRead(A0));
   bool x,y,z = true;
@@ -335,7 +393,8 @@ void bouncyLines()
   led leds[12];
   led leds2[12];
 
-  for (int i = 0; i <= 4000; i++)
+  start = millis();
+  while((millis()-start) < time)
   {
     if (idx == 12)
     {
@@ -406,7 +465,6 @@ void bouncyLines()
     LED(leds[idx].lev, leds[idx].row, leds[idx].col, leds[idx].r, leds[idx].g, leds[idx].b);
     LED(leds2[idx].lev, leds2[idx].row, leds2[idx].col, leds2[idx].r, leds2[idx].g, leds2[idx].b);
     delay(20);
-    //LED(one.lev, one.row, one.col, 0, 0, 0);
     if (one.row == 7)
     {
       x = false;
@@ -459,6 +517,7 @@ void bouncyLines()
 
     idx++;
   }
+  clean();
 }
 
 void twinkleRedYellowBlue()
@@ -693,6 +752,108 @@ void fillColor(byte color[])
   }
 }
 
+void expandingCube(int d)
+{
+  int col = 0;
+  int min, max, b1, b2;
+  bool light = false;
+  for (int i = 3; i >= 0; i--) // 4 cubes, 2,4,6,8 cubed
+  {
+    min = 0 + i;
+    max = 7 - i;
+    // Light LED when it is along one of the 3 axis within the bounds
+    // x: (col == min || col == max) && (row >= min && row <= max)
+    // y: (row == min || row == max) && (col >= min && col <= max)
+    // z: (lev == min || lev == max) && ((row == min && col == min) || (row == min && col == max) || (row == max && col == min) || (row == max && col == max))
+    for (int lev = 0; lev <= 7; lev++)
+    {
+      for (int row = 0; row <= 7; row++)
+      {
+        for (int col = 0; col <= 7; col++)
+        {
+          if (((lev == min || lev == max) && (col == min || col == max) && (row >= min && row <= max)) ||
+              ((lev == min || lev == max) && (row == min || row == max) && (col >= min && col <= max)) ||
+              ((lev >= min && lev <= max) && ((row == min && col == min) || (row == min && col == max) || (row == max && col == min) || (row == max && col == max))))
+              {
+                LED(lev,row,col,15,0,0);
+              }
+        }
+      }
+    }
+    delay(d);
+    for (int lev = 0; lev <= 7; lev++)
+    {
+      for (int row = 0; row <= 7; row++)
+      {
+        for (int col = 0; col <= 7; col++)
+        {
+          if (((lev == min || lev == max) && (col == min || col == max) && (row >= min && row <= max)) ||
+              ((lev == min || lev == max) && (row == min || row == max) && (col >= min && col <= max)) ||
+              ((lev >= min && lev <= max) && ((row == min && col == min) || (row == min && col == max) || (row == max && col == min) || (row == max && col == max))))
+              {
+                LED(lev,row,col,0,0,0);
+              }
+        }
+      }
+    }
+  }
+}
+
+void contractingCube(int d)
+{
+  int col = 0;
+  int min, max, b1, b2;
+  bool light = false;
+  for (int i = 0; i <= 3; i++) // 4 cubes, 2,4,6,8 cubed
+  {
+    min = 0 + i;
+    max = 7 - i;
+    // Light LED when it is along one of the 3 axis within the bounds
+    // x: (col == min || col == max) && (row >= min && row <= max)
+    // y: (row == min || row == max) && (col >= min && col <= max)
+    // z: (lev == min || lev == max) && ((row == min && col == min) || (row == min && col == max) || (row == max && col == min) || (row == max && col == max))
+    for (int lev = 0; lev <= 7; lev++)
+    {
+      for (int row = 0; row <= 7; row++)
+      {
+        for (int col = 0; col <= 7; col++)
+        {
+          /*if ((lev == min || lev == max) && (((col == min || col == max) && (row >= min && row <= max)) || ((row == min || row == max) && (col >= min && col <= max))))
+          {
+            LED(lev,row,col,15,0,0);
+          }*/
+          if (((lev == min || lev == max) && (col == min || col == max) && (row >= min && row <= max)) ||
+              ((lev == min || lev == max) && (row == min || row == max) && (col >= min && col <= max)) ||
+              ((lev >= min && lev <= max) && ((row == min && col == min) || (row == min && col == max) || (row == max && col == min) || (row == max && col == max))))
+              {
+                LED(lev,row,col,15,0,0);
+              }
+        }
+      }
+    }
+    delay(d);
+    for (int lev = 0; lev <= 7; lev++)
+    {
+      for (int row = 0; row <= 7; row++)
+      {
+        for (int col = 0; col <= 7; col++)
+        {
+          /*if ((lev == min || lev == max) && (((col == min || col == max) && (row >= min && row <= max)) || ((row == min || row == max) && (col >= min && col <= max))))
+          {
+            LED(lev,row,col,0,0,0);
+          }*/
+          if (((lev == min || lev == max) && (col == min || col == max) && (row >= min && row <= max)) ||
+              ((lev == min || lev == max) && (row == min || row == max) && (col >= min && col <= max)) ||
+              ((lev >= min && lev <= max) && ((row == min && col == min) || (row == min && col == max) || (row == max && col == min) || (row == max && col == max))))
+              {
+                LED(lev,row,col,0,0,0);
+              }
+        }
+      }
+    }
+  }
+}
+
 void fireworks (int iterations, int n, int delayx) {
   clean();
 
@@ -871,144 +1032,6 @@ void waitForSerial()
   while(Serial.available()){Serial.read();}
   while (!Serial.available()) { }
   //Serial.println(Serial.read());
-}
-
-void greenPrint()
-{
-  waitForSerial();
-  Serial.println("green0:");
-  Serial.print("[");
-  int count = 0;
-  for (int i = 0; i < 64; i++)
-  {
-    count++;
-    Serial.print(green0[i]);
-    Serial.print(",");
-    if (count % 8 == 0)
-    {
-      Serial.println("");
-      Serial.print(" ");
-    }
-  }
-  Serial.println("]");
-
-  Serial.println("green1:");
-  Serial.print("[");
-  count = 0;
-  for (int i = 0; i < 64; i++)
-  {
-    count++;
-    Serial.print(green1[i]);
-    Serial.print(",");
-    if (count % 8 == 0)
-    {
-      Serial.println("");
-      Serial.print(" ");
-    }
-  }
-  Serial.println("]");
-
-  Serial.println("green2:");
-  Serial.print("[");
-  count = 0;
-  for (int i = 0; i < 64; i++)
-  {
-    count++;
-    Serial.print(green2[i]);
-    Serial.print(",");
-    if (count % 8 == 0)
-    {
-      Serial.println("");
-      Serial.print(" ");
-    }
-  }
-  Serial.println("]");
-
-  Serial.println("green3:");
-  Serial.print("[");
-  count = 0;
-  for (int i = 0; i < 64; i++)
-  {
-    count++;
-    Serial.print(green3[i]);
-    Serial.print(",");
-    if (count % 8 == 0)
-    {
-      Serial.println("");
-      Serial.print(" ");
-    }
-  }
-  Serial.println("]");
-  Serial.println("====================================");
-}
-
-void bluePrint()
-{
-  waitForSerial();
-  Serial.println("blue0:");
-  Serial.print("[");
-  int count = 0;
-  for (int i = 0; i < 64; i++)
-  {
-    count++;
-    Serial.print(blue0[i]);
-    Serial.print(",");
-    if (count % 8 == 0)
-    {
-      Serial.println("");
-      Serial.print(" ");
-    }
-  }
-  Serial.println("]");
-
-  Serial.println("blue1:");
-  Serial.print("[");
-  count = 0;
-  for (int i = 0; i < 64; i++)
-  {
-    count++;
-    Serial.print(blue1[i]);
-    Serial.print(",");
-    if (count % 8 == 0)
-    {
-      Serial.println("");
-      Serial.print(" ");
-    }
-  }
-  Serial.println("]");
-
-  Serial.println("blue2:");
-  Serial.print("[");
-  count = 0;
-  for (int i = 0; i < 64; i++)
-  {
-    count++;
-    Serial.print(blue2[i]);
-    Serial.print(",");
-    if (count % 8 == 0)
-    {
-      Serial.println("");
-      Serial.print(" ");
-    }
-  }
-  Serial.println("]");
-
-  Serial.println("blue3:");
-  Serial.print("[");
-  count = 0;
-  for (int i = 0; i < 64; i++)
-  {
-    count++;
-    Serial.print(blue3[i]);
-    Serial.print(",");
-    if (count % 8 == 0)
-    {
-      Serial.println("");
-      Serial.print(" ");
-    }
-  }
-  Serial.println("]");
-  Serial.println("====================================");
 }
 
 void oneColorFill(int d, char color)
