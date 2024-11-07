@@ -5,6 +5,7 @@
 #include "PorterRobinsonMirror.h"
 #include "MadeonHypermania.h"
 #include "PorterRobinsonKnockYourselfOut.h"
+#include "Shapes.h"
 
 #define latch_pin 2   // can use any pin you want to latch the shift registers
 #define blank_pin 4   // same, can use any pin you want for this, just make sure you pull up via a 1k to 5V
@@ -97,8 +98,97 @@ void setup()
 
 void loop()
 {
+  int d = 100;
+  cube myCube;
+  cube otherCube;
+  cube lastCube;
+  myCube.resetCubePosition();
+  myCube.setCubeColor(BLUE);
+  otherCube.resetCubePosition();
+  otherCube.setCubeColor(GREEN);
+  lastCube.resetCubePosition();
+  lastCube.setCubeColor(RED);
+  otherCube.Left();
+  otherCube.Left();
+  otherCube.Left();
+  otherCube.Left();
+  otherCube.Left();
+  otherCube.Left();
+  lastCube.Forward();
+  lastCube.Forward();
+  lastCube.Forward();
+  lastCube.Forward();
+  lastCube.Forward();
+  lastCube.Forward();
+  lastCube.Left();
+  lastCube.Left();
+  lastCube.Left();
+  lastCube.On();
+  otherCube.On();
+  myCube.On();
+  delay(d);
+  myCube.Up();
+  otherCube.Right();
+  lastCube.Back();
+  delay(d);
+  myCube.Up();
+  otherCube.Right();
+  lastCube.Back();
+  delay(d);
+  myCube.Up();
+  otherCube.Right();
+  lastCube.Back();
+  delay(d);
+  myCube.Up();
+  otherCube.Right();
+  lastCube.Back();
+  delay(d);
+  myCube.Up();
+  otherCube.Right();
+  lastCube.Back();
+  delay(d);
+  myCube.Up();
+  otherCube.Right();
+  lastCube.Back();
+  delay(d);
+  myCube.Down();
+  otherCube.Left();
+  lastCube.Forward();
+  delay(d);
+  myCube.Down();
+  otherCube.Left();
+  lastCube.Forward();
+  delay(d);
+  myCube.Down();
+  otherCube.Left();
+  lastCube.Forward();
+  delay(d);
+  myCube.Down();
+  otherCube.Left();
+  lastCube.Forward();
+  delay(d);
+  myCube.Down();
+  otherCube.Left();
+  lastCube.Forward();
+  delay(d);
+  myCube.Down();
+  otherCube.Left();
+  lastCube.Forward();
+  delay(d);
+  myCube.Down();
+  otherCube.Left();
+  lastCube.Forward();
+  delay(d);
+  otherCube.Off();
+  myCube.Off();
+  lastCube.Off();
+  //delay(d);
+  //testColor(100,BLUE);
+  //oneColorFill(20,'g');
   //knockYourselfOut();
-  blinkTimer(500);
+  //expandingCube(40);
+  //contractingCube(80);
+  /*blinkTimer(500);
   timer(5000);
   porterMirror();
   whitePane();
@@ -106,7 +196,7 @@ void loop()
   whitePane();
   bouncyLines(6700);
   whitePane();
-  bouncyLines(7000);
+  bouncyLines(7000);*/
 }// loop()
 
 //This routine is called in the background automatically at frequency set by OCR1A

@@ -170,7 +170,7 @@ void expandingSquare(int col)
 
 void intro()
 {
-  int numNotes = 18;
+  int numNotes = 16;
   int lev, row, col, waitTime;
   byte* randomColor;
   for (int i = 1; i <= numNotes; i++)
@@ -194,6 +194,71 @@ void intro()
     {
       waitTime = 344;
     }
+    LED(lev,row,col,randomColor[0],randomColor[1],randomColor[2]);
+    timer(waitTime);
+    LED(lev,row,col,0,0,0);
+  }
+}
+
+void melody1()
+{
+  int numNotes = 9;
+  int lev, row, col, waitTime;
+  byte* randomColor;
+  for (int i = 1; i <= numNotes; i++)
+  {
+    lev = random(8);
+    row = random(8);
+    col = random(8);
+    if (i % 2 == 0)
+    {
+      randomColor = FUCHSIA;
+    }
+    else
+    {
+      randomColor = LIME;
+    }
+    if (i <= 5 && i >= 3)
+    {
+      waitTime = 172;
+    }
+    else
+    {
+      waitTime = 344;
+    }
+    LED(lev,row,col,randomColor[0],randomColor[1],randomColor[2]);
+    timer(waitTime);
+    LED(lev,row,col,0,0,0);
+  }
+}
+
+void melody2()
+{
+  int numNotes = 8;
+  int lev, row, col, waitTime;
+  waitTime = 344;
+  byte* randomColor;
+  for (int i = 1; i <= numNotes; i++)
+  {
+    lev = random(8);
+    row = random(8);
+    col = random(8);
+    if (i % 2 == 0)
+    {
+      randomColor = FUCHSIA;
+    }
+    else
+    {
+      randomColor = LIME;
+    }
+    /*if (i <= 5 && i >= 3)
+    {
+      waitTime = 172;
+    }
+    else
+    {
+      waitTime = 344;
+    }*/
     LED(lev,row,col,randomColor[0],randomColor[1],randomColor[2]);
     timer(waitTime);
     LED(lev,row,col,0,0,0);
@@ -280,8 +345,345 @@ void Explode(int numParticles, int delayx) {
   }
 }
 
+void FlashColonDee(int d)
+{
+  // :
+  /*newLED(5,7,0,FUCHSIA);
+  newLED(5,6,0,FUCHSIA);
+  newLED(6,7,0,FUCHSIA);
+  newLED(6,6,0,FUCHSIA);
+
+  newLED(1,7,0,FUCHSIA);
+  newLED(1,6,0,FUCHSIA);
+  newLED(2,7,0,FUCHSIA);
+  newLED(2,6,0,FUCHSIA);*/
+
+  // centered ":"
+  newLED(5,6,0,FUCHSIA);
+  newLED(5,5,0,FUCHSIA);
+  newLED(6,6,0,FUCHSIA);
+  newLED(6,5,0,FUCHSIA);
+
+  newLED(1,6,0,FUCHSIA);
+  newLED(1,5,0,FUCHSIA);
+  newLED(2,6,0,FUCHSIA);
+  newLED(2,5,0,FUCHSIA);
+
+  // D
+  /*newLED(5,0,0,FUCHSIA);
+  newLED(4,0,0,FUCHSIA);
+  newLED(3,0,0,FUCHSIA);
+  newLED(2,0,0,FUCHSIA);
+
+  newLED(6,1,0,FUCHSIA);
+  newLED(1,1,0,FUCHSIA);
+
+  newLED(7,2,0,FUCHSIA);
+  newLED(0,2,0,FUCHSIA);
+
+  newLED(7,3,0,FUCHSIA);
+  newLED(0,3,0,FUCHSIA);
+
+  newLED(7,4,0,FUCHSIA);
+  newLED(6,4,0,FUCHSIA);
+  newLED(5,4,0,FUCHSIA);
+  newLED(4,4,0,FUCHSIA);
+  newLED(3,4,0,FUCHSIA);
+  newLED(2,4,0,FUCHSIA);
+  newLED(1,4,0,FUCHSIA);
+  newLED(0,4,0,FUCHSIA);*/
+
+  // slim D
+  newLED(5,0,0,FUCHSIA);
+  newLED(4,0,0,FUCHSIA);
+  newLED(3,0,0,FUCHSIA);
+  newLED(2,0,0,FUCHSIA);
+
+  newLED(6,1,0,FUCHSIA);
+  newLED(1,1,0,FUCHSIA);
+
+  newLED(7,2,0,FUCHSIA);
+  newLED(0,2,0,FUCHSIA);
+
+  newLED(7,3,0,FUCHSIA);
+  newLED(6,3,0,FUCHSIA);
+  newLED(5,3,0,FUCHSIA);
+  newLED(4,3,0,FUCHSIA);
+  newLED(3,3,0,FUCHSIA);
+  newLED(2,3,0,FUCHSIA);
+  newLED(1,3,0,FUCHSIA);
+  newLED(0,3,0,FUCHSIA);
+
+  delay(d);
+
+  // :
+  /*newLED(5,7,0,BLACK);
+  newLED(5,6,0,BLACK);
+  newLED(6,7,0,BLACK);
+  newLED(6,6,0,BLACK);
+
+  newLED(1,7,0,BLACK);
+  newLED(1,6,0,BLACK);
+  newLED(2,7,0,BLACK);
+  newLED(2,6,0,BLACK);*/
+
+  // centered ":"
+  newLED(5,6,0,BLACK);
+  newLED(5,5,0,BLACK);
+  newLED(6,6,0,BLACK);
+  newLED(6,5,0,BLACK);
+
+  newLED(1,6,0,BLACK);
+  newLED(1,5,0,BLACK);
+  newLED(2,6,0,BLACK);
+  newLED(2,5,0,BLACK);
+
+  // D
+  /*newLED(5,0,0,BLACK);
+  newLED(4,0,0,BLACK);
+  newLED(3,0,0,BLACK);
+  newLED(2,0,0,BLACK);
+
+  newLED(6,1,0,BLACK);
+  newLED(1,1,0,BLACK);
+
+  newLED(7,2,0,BLACK);
+  newLED(0,2,0,BLACK);
+
+  newLED(7,3,0,BLACK);
+  newLED(0,3,0,BLACK);
+
+  newLED(7,4,0,BLACK);
+  newLED(6,4,0,BLACK);
+  newLED(5,4,0,BLACK);
+  newLED(4,4,0,BLACK);
+  newLED(3,4,0,BLACK);
+  newLED(2,4,0,BLACK);
+  newLED(1,4,0,BLACK);
+  newLED(0,4,0,BLACK);*/
+
+  // slim D
+  newLED(5,0,0,BLACK);
+  newLED(4,0,0,BLACK);
+  newLED(3,0,0,BLACK);
+  newLED(2,0,0,BLACK);
+
+  newLED(6,1,0,BLACK);
+  newLED(1,1,0,BLACK);
+
+  newLED(7,2,0,BLACK);
+  newLED(0,2,0,BLACK);
+
+  newLED(7,3,0,BLACK);
+  newLED(6,3,0,BLACK);
+  newLED(5,3,0,BLACK);
+  newLED(4,3,0,BLACK);
+  newLED(3,3,0,BLACK);
+  newLED(2,3,0,BLACK);
+  newLED(1,3,0,BLACK);
+  newLED(0,3,0,BLACK);
+
+  delay(d);
+}
+
+void ecksDee()
+{
+  // "X"
+  newLED(7,4,0,LIME);
+  newLED(6,4,0,LIME);
+  newLED(5,4,0,LIME);
+  newLED(0,4,0,LIME);
+  newLED(1,4,0,LIME);
+  newLED(2,4,0,LIME);
+
+  newLED(3,6,0,LIME);
+  newLED(4,6,0,LIME);
+  newLED(3,5,0,LIME);
+  newLED(4,5,0,LIME);
+
+  newLED(7,7,0,LIME);
+  newLED(6,7,0,LIME);
+  newLED(5,7,0,LIME);
+  newLED(0,7,0,LIME);
+  newLED(1,7,0,LIME);
+  newLED(2,7,0,LIME);
+
+
+
+  // "x" 
+  /*newLED(0,4,0,LIME);
+  newLED(3,4,0,LIME);
+
+  newLED(1,6,0,LIME);
+  newLED(1,5,0,LIME);
+
+  newLED(2,6,0,LIME);
+  newLED(2,5,0,LIME);
+
+  newLED(0,7,0,LIME);
+  newLED(3,7,0,LIME);*/
+
+  // slim D
+  newLED(5,0,0,LIME);
+  newLED(4,0,0,LIME);
+  newLED(3,0,0,LIME);
+  newLED(2,0,0,LIME);
+
+  newLED(6,1,0,LIME);
+  newLED(1,1,0,LIME);
+
+  newLED(7,2,0,LIME);
+  newLED(0,2,0,LIME);
+
+  newLED(7,3,0,LIME);
+  newLED(6,3,0,LIME);
+  newLED(5,3,0,LIME);
+  newLED(4,3,0,LIME);
+  newLED(3,3,0,LIME);
+  newLED(2,3,0,LIME);
+  newLED(1,3,0,LIME);
+  newLED(0,3,0,LIME);
+
+  delay(60);
+}
+
+void FlashXD(int d)
+{
+  // "X"
+  newLED(7,4,0,LIME);
+  newLED(6,4,0,LIME);
+  newLED(5,4,0,LIME);
+  newLED(0,4,0,LIME);
+  newLED(1,4,0,LIME);
+  newLED(2,4,0,LIME);
+
+  newLED(3,6,0,LIME);
+  newLED(4,6,0,LIME);
+  newLED(3,5,0,LIME);
+  newLED(4,5,0,LIME);
+
+  newLED(7,7,0,LIME);
+  newLED(6,7,0,LIME);
+  newLED(5,7,0,LIME);
+  newLED(0,7,0,LIME);
+  newLED(1,7,0,LIME);
+  newLED(2,7,0,LIME);
+
+
+
+  // "x" 
+  /*newLED(0,4,0,LIME);
+  newLED(3,4,0,LIME);
+
+  newLED(1,6,0,LIME);
+  newLED(1,5,0,LIME);
+
+  newLED(2,6,0,LIME);
+  newLED(2,5,0,LIME);
+
+  newLED(0,7,0,LIME);
+  newLED(3,7,0,LIME);*/
+
+  // slim D
+  newLED(5,0,0,LIME);
+  newLED(4,0,0,LIME);
+  newLED(3,0,0,LIME);
+  newLED(2,0,0,LIME);
+
+  newLED(6,1,0,LIME);
+  newLED(1,1,0,LIME);
+
+  newLED(7,2,0,LIME);
+  newLED(0,2,0,LIME);
+
+  newLED(7,3,0,LIME);
+  newLED(6,3,0,LIME);
+  newLED(5,3,0,LIME);
+  newLED(4,3,0,LIME);
+  newLED(3,3,0,LIME);
+  newLED(2,3,0,LIME);
+  newLED(1,3,0,LIME);
+  newLED(0,3,0,LIME);
+
+  delay(d);
+
+  // "X"
+  newLED(7,4,0,BLACK);
+  newLED(6,4,0,BLACK);
+  newLED(5,4,0,BLACK);
+  newLED(0,4,0,BLACK);
+  newLED(1,4,0,BLACK);
+  newLED(2,4,0,BLACK);
+
+  newLED(3,6,0,BLACK);
+  newLED(4,6,0,BLACK);
+  newLED(3,5,0,BLACK);
+  newLED(4,5,0,BLACK);
+
+  newLED(7,7,0,BLACK);
+  newLED(6,7,0,BLACK);
+  newLED(5,7,0,BLACK);
+  newLED(0,7,0,BLACK);
+  newLED(1,7,0,BLACK);
+  newLED(2,7,0,BLACK);
+
+
+
+  // "x" 
+  /*newLED(0,4,0,LIME);
+  newLED(3,4,0,LIME);
+
+  newLED(1,6,0,LIME);
+  newLED(1,5,0,LIME);
+
+  newLED(2,6,0,LIME);
+  newLED(2,5,0,LIME);
+
+  newLED(0,7,0,LIME);
+  newLED(3,7,0,LIME);*/
+
+  // slim D
+  newLED(5,0,0,BLACK);
+  newLED(4,0,0,BLACK);
+  newLED(3,0,0,BLACK);
+  newLED(2,0,0,BLACK);
+
+  newLED(6,1,0,BLACK);
+  newLED(1,1,0,BLACK);
+
+  newLED(7,2,0,BLACK);
+  newLED(0,2,0,BLACK);
+
+  newLED(7,3,0,BLACK);
+  newLED(6,3,0,BLACK);
+  newLED(5,3,0,BLACK);
+  newLED(4,3,0,BLACK);
+  newLED(3,3,0,BLACK);
+  newLED(2,3,0,BLACK);
+  newLED(1,3,0,BLACK);
+  newLED(0,3,0,BLACK);
+
+  delay(d);
+}
+
 void knockYourselfOut()
 {
-  intro();
+  melody1();
+  melody2();
+  for (int i = 0; i <= 3; i++)
+  {
+    FlashColonDee(80);
+  }
+  //intro();
   Explode(20,10);
+  melody1();
+  melody1();
+  melody1();
+  melody2();
+  //Explode(20,10);
+  for (int i = 0; i <= 3; i++)
+  {
+    FlashXD(80);
+  }
+  //ecksDee();
 }

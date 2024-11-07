@@ -150,7 +150,7 @@ void rainWithSlices()
   }
 }
 
-void expandingSquare(int col)
+/*void expandingSquare(int col)
 {
   //int col = 0;
   int lowerBound, upperBound, b1, b2;
@@ -206,7 +206,7 @@ void expandingSquare(int col)
       }
     }
   }
-}
+}*/
 
 void oneLedSpiral()
 {
@@ -752,7 +752,7 @@ void fillColor(byte color[])
   }
 }
 
-void expandingCube(int d)
+/*void expandingCube(int d)
 {
   int col = 0;
   int min, max, b1, b2;
@@ -818,10 +818,6 @@ void contractingCube(int d)
       {
         for (int col = 0; col <= 7; col++)
         {
-          /*if ((lev == min || lev == max) && (((col == min || col == max) && (row >= min && row <= max)) || ((row == min || row == max) && (col >= min && col <= max))))
-          {
-            LED(lev,row,col,15,0,0);
-          }*/
           if (((lev == min || lev == max) && (col == min || col == max) && (row >= min && row <= max)) ||
               ((lev == min || lev == max) && (row == min || row == max) && (col >= min && col <= max)) ||
               ((lev >= min && lev <= max) && ((row == min && col == min) || (row == min && col == max) || (row == max && col == min) || (row == max && col == max))))
@@ -838,10 +834,6 @@ void contractingCube(int d)
       {
         for (int col = 0; col <= 7; col++)
         {
-          /*if ((lev == min || lev == max) && (((col == min || col == max) && (row >= min && row <= max)) || ((row == min || row == max) && (col >= min && col <= max))))
-          {
-            LED(lev,row,col,0,0,0);
-          }*/
           if (((lev == min || lev == max) && (col == min || col == max) && (row >= min && row <= max)) ||
               ((lev == min || lev == max) && (row == min || row == max) && (col >= min && col <= max)) ||
               ((lev >= min && lev <= max) && ((row == min && col == min) || (row == min && col == max) || (row == max && col == min) || (row == max && col == max))))
@@ -852,7 +844,7 @@ void contractingCube(int d)
       }
     }
   }
-}
+}*/
 
 void fireworks (int iterations, int n, int delayx) {
   clean();
@@ -1175,6 +1167,26 @@ void basic_rgb_cycle(int del)
       {
         LED(i,j,k,0,0,15);
         delay(del);
+      }
+    }
+  }
+}
+
+void testColor(int d, byte color[])
+{
+  int r = color[0];
+  int g = color[1];
+  int b = color[2];
+  for (int i = 0; i < 8; i++)
+  {
+    for (int j = 0; j <8; j++)
+    {
+      for (int k = 0; k <8; k++)
+      {
+        LED(i,j,k,r,g,b);
+        delay(d);
+        LED(i,j,k,0,0,0);
+        delay(d);
       }
     }
   }
